@@ -7,13 +7,11 @@
 
     <title>Meu Progresso ✦</title>
 
-    <!-- ?v=4 força o navegador a pegar o CSS novo -->
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 
 <body>
 
-    <!-- FUNDO -->
     <video class="video-background" autoplay muted loop playsinline>
         <source src="fundo.mp4" type="video/mp4">
     </video>
@@ -21,7 +19,6 @@
     <div class="overlay"></div>
 
 
-    <!-- CARD PRINCIPAL -->
     <main class="card">
 
         <div class="simbolo">✦</div>
@@ -33,25 +30,21 @@
         <h1>Meu Progresso</h1>
 
 
-        <!-- PORCENTAGEM -->
         <div class="porcentagem">
-            <span id="numero">0,00</span>%
+            <span id="numero">53,33</span>%
         </div>
 
 
-        <!-- BARRA -->
         <div class="barra">
             <div id="barraProgresso" class="progresso"></div>
         </div>
 
 
-        <!-- AULAS -->
         <p id="aulasTexto" class="aulas-texto">
             48 / 90 AULAS
         </p>
 
 
-        <!-- DATA -->
         <p id="dataAtualizacao" class="data-atualizacao">
             Atualizado em 20/09/2026
         </p>
@@ -60,7 +53,6 @@
         <div class="linha"></div>
 
 
-        <!-- TEXTO -->
         <p class="mensagem">
 
             Estou na metade do curso, no caso,
@@ -83,26 +75,23 @@
     </main>
 
 
-    <!--
-        ÁREA SECRETA
-        FICA NO CANTO INFERIOR ESQUERDO
-        NÃO APARECE VISUALMENTE
-    -->
+    <!-- ÁREA INVISÍVEL NO CANTO INFERIOR ESQUERDO -->
+
     <button
         id="botaoSecreto"
         aria-label="Abrir painel"
     ></button>
 
 
-    <!-- PAINEL - NASCE OBRIGATORIAMENTE ESCONDIDO -->
+    <!-- PAINEL DE EDIÇÃO -->
+
     <div id="painelSecreto" hidden>
 
         <div class="painel-topo">
 
-            <div>
-                <span class="mini-estrela">✦</span>
-                Atualizar progresso
-            </div>
+            <span>
+                ✦ Atualizar progresso
+            </span>
 
             <button id="fecharPainel">
                 ×
@@ -141,15 +130,16 @@
         </button>
 
 
+        <p class="painel-status" id="painelStatus"></p>
+
         <p class="painel-dica">
-            A porcentagem e a data são atualizadas automaticamente.
+            O progresso será salvo online.
         </p>
 
     </div>
 
 
-    <!-- ?v=4 força o navegador a pegar o JS novo -->
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=6"></script>
 
 </body>
 
