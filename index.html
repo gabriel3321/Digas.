@@ -7,21 +7,21 @@
 
     <title>Meu Progresso ✦</title>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- ?v=4 força o navegador a pegar o CSS novo -->
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
 
-    <!-- VÍDEO DE FUNDO -->
+    <!-- FUNDO -->
     <video class="video-background" autoplay muted loop playsinline>
         <source src="fundo.mp4" type="video/mp4">
     </video>
 
-    <!-- SOMBRA SOBRE O FUNDO -->
     <div class="overlay"></div>
 
 
-    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- CARD PRINCIPAL -->
     <main class="card">
 
         <div class="simbolo">✦</div>
@@ -31,6 +31,7 @@
         </p>
 
         <h1>Meu Progresso</h1>
+
 
         <!-- PORCENTAGEM -->
         <div class="porcentagem">
@@ -59,13 +60,19 @@
         <div class="linha"></div>
 
 
-        <!-- SUA MENSAGEM -->
+        <!-- TEXTO -->
         <p class="mensagem">
+
             Estou na metade do curso, no caso,
-            <strong id="porcentagemMensagem">53,33%</strong>. 📚
+
+            <strong id="porcentagemMensagem">
+                53,33%
+            </strong>. 📚
+
             Mas não fiz esse site. Eu descobri que site é,
             infelizmente, somente JavaScript, e eu tô aprendendo .Lua.
             Mas .Lua eu estou sabendo. 😎
+
         </p>
 
 
@@ -76,47 +83,73 @@
     </main>
 
 
-    <!-- BOTÃO INVISÍVEL -->
-    <button id="botaoSecreto"></button>
+    <!--
+        ÁREA SECRETA
+        FICA NO CANTO INFERIOR ESQUERDO
+        NÃO APARECE VISUALMENTE
+    -->
+    <button
+        id="botaoSecreto"
+        aria-label="Abrir painel"
+    ></button>
 
 
-    <!-- PAINEL SECRETO -->
-    <div id="painelSecreto">
+    <!-- PAINEL - NASCE OBRIGATORIAMENTE ESCONDIDO -->
+    <div id="painelSecreto" hidden>
 
-        <div class="painel-titulo">
-            ✦ Atualizar progresso
+        <div class="painel-topo">
+
+            <div>
+                <span class="mini-estrela">✦</span>
+                Atualizar progresso
+            </div>
+
+            <button id="fecharPainel">
+                ×
+            </button>
+
         </div>
+
 
         <p class="painel-descricao">
             Quantas aulas você concluiu?
         </p>
 
+
         <div class="campo-aulas">
 
             <input
-                type="number"
                 id="aulasConcluidas"
+                type="number"
                 min="0"
                 max="90"
-                placeholder="48"
+                step="1"
             >
 
             <span>/ 90</span>
 
         </div>
 
+
+        <div id="previewPorcentagem">
+            53,33%
+        </div>
+
+
         <button id="salvarProgresso">
             SALVAR PROGRESSO
         </button>
 
+
         <p class="painel-dica">
-            A porcentagem será calculada automaticamente.
+            A porcentagem e a data são atualizadas automaticamente.
         </p>
 
     </div>
 
 
-    <script src="script.js"></script>
+    <!-- ?v=4 força o navegador a pegar o JS novo -->
+    <script src="script.js?v=4"></script>
 
 </body>
 
