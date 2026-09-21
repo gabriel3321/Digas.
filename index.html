@@ -12,44 +12,62 @@
 
 <body>
 
-    <!-- Vídeo de fundo -->
+    <!-- VÍDEO DE FUNDO -->
     <video class="video-background" autoplay muted loop playsinline>
         <source src="fundo.mp4" type="video/mp4">
     </video>
 
-    <!-- Escurece o vídeo -->
+    <!-- SOMBRA SOBRE O FUNDO -->
     <div class="overlay"></div>
 
-    <!-- Conteúdo principal -->
+
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="card">
 
         <div class="simbolo">✦</div>
 
-        <p class="subtitulo">JORNADA DE APRENDIZADO</p>
+        <p class="subtitulo">
+            JORNADA DE APRENDIZADO
+        </p>
 
         <h1>Meu Progresso</h1>
 
+        <!-- PORCENTAGEM -->
         <div class="porcentagem">
-            <span id="numero">0</span>%
+            <span id="numero">0,00</span>%
         </div>
 
+
+        <!-- BARRA -->
         <div class="barra">
-            <div class="progresso"></div>
+            <div id="barraProgresso" class="progresso"></div>
         </div>
 
-        <p class="progresso-texto">
-            CURSO CONCLUÍDO
+
+        <!-- AULAS -->
+        <p id="aulasTexto" class="aulas-texto">
+            48 / 90 AULAS
         </p>
+
+
+        <!-- DATA -->
+        <p id="dataAtualizacao" class="data-atualizacao">
+            Atualizado em 20/09/2026
+        </p>
+
 
         <div class="linha"></div>
 
+
+        <!-- SUA MENSAGEM -->
         <p class="mensagem">
             Estou na metade do curso, no caso,
-            <strong>53,33%</strong>. 📚
+            <strong id="porcentagemMensagem">53,33%</strong>. 📚
             Mas não fiz esse site. Eu descobri que site é,
             infelizmente, somente JavaScript, e eu tô aprendendo .Lua.
             Mas .Lua eu estou sabendo. 😎
         </p>
+
 
         <div class="decoracao">
             ✦　✧　✦
@@ -57,28 +75,46 @@
 
     </main>
 
-    <!-- Contador -->
-    <div id="contadorPublico">0</div>
 
-    <!-- Área invisível no canto inferior esquerdo -->
+    <!-- BOTÃO INVISÍVEL -->
     <button id="botaoSecreto"></button>
 
-    <!-- Painel secreto -->
+
+    <!-- PAINEL SECRETO -->
     <div id="painelSecreto">
 
-        <p>Alterar contador 👀</p>
+        <div class="painel-titulo">
+            ✦ Atualizar progresso
+        </div>
 
-        <input
-            type="number"
-            id="novoValor"
-            placeholder="Novo valor"
-        >
+        <p class="painel-descricao">
+            Quantas aulas você concluiu?
+        </p>
 
-        <button id="salvarValor">
-            Salvar
+        <div class="campo-aulas">
+
+            <input
+                type="number"
+                id="aulasConcluidas"
+                min="0"
+                max="90"
+                placeholder="48"
+            >
+
+            <span>/ 90</span>
+
+        </div>
+
+        <button id="salvarProgresso">
+            SALVAR PROGRESSO
         </button>
 
+        <p class="painel-dica">
+            A porcentagem será calculada automaticamente.
+        </p>
+
     </div>
+
 
     <script src="script.js"></script>
 
