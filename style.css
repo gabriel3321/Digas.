@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    color: white;
+    background: #050914;
+}
+
+
+/* =========================
+   VÍDEO DE FUNDO
+========================= */
+
+.video-background {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transform: translate(-50%, -50%);
+
+    z-index: -3;
+}
+
+
+/* =========================
+   SOMBRA SOBRE O VÍDEO
+========================= */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(20, 35, 70, 0.15),
+            rgba(3, 7, 20, 0.72)
+        );
+
+    z-index: -2;
+}
+
+
+/* =========================
+   CARD PRINCIPAL
+========================= */
+
+.card {
+    position: relative;
+
+    width: min(720px, 90%);
+
+    padding: 45px 55px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(13, 24, 48, 0.83),
+            rgba(24, 35, 66, 0.70)
+        );
+
+    border: 1px solid rgba(255, 226, 153, 0.65);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 20px 70px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(110, 180, 255, 0.18),
+        inset 0 0 30px rgba(255, 255, 255, 0.03);
+
+    animation: aparecer 1.2s ease;
+}
+
+
+/* Linha dourada interna */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 7px;
+
+    border: 1px solid rgba(255, 223, 145, 0.18);
+
+    border-radius: 16px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   SÍMBOLO
+========================= */
+
+.simbolo {
+    font-size: 35px;
+
+    color: #ffe4a0;
+
+    text-shadow:
+        0 0 10px #ffd978,
+        0 0 25px rgba(255, 214, 110, 0.7);
+
+    animation: brilho 2.5s infinite alternate;
+}
+
+
+/* =========================
+   TEXTOS
+========================= */
+
+.subtitulo {
+    margin-top: 10px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 5px;
+
+    color: #b9d9ff;
+}
+
+
+h1 {
+    margin-top: 8px;
+
+    font-size: 42px;
+
+    font-weight: 500;
+
+    letter-spacing: 1px;
+
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================
+   PORCENTAGEM
+========================= */
+
+.porcentagem {
+    margin-top: 15px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 70px;
+
+    font-weight: 700;
+
+    color: #ffe6a7;
+
+    text-shadow:
+        0 0 15px rgba(255, 218, 120, 0.45);
+}
+
+
+/* =========================
+   BARRA
+========================= */
+
+.barra {
+    width: 100%;
+    height: 12px;
+
+    margin-top: 15px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    border-radius: 100px;
+
+    background: rgba(0, 0, 0, 0.35);
+}
+
+
+.progresso {
+    width: 0;
+    height: 100%;
+
+    border-radius: 100px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #86c9ff,
+            #d8edff,
+            #ffe39b
+        );
+
+    box-shadow:
+        0 0 15px rgba(130, 205, 255, 0.8);
+
+    animation: carregar 2.3s ease forwards;
+}
+
+
+.progresso-texto {
+    margin-top: 9px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* =========================
+   SEPARADOR
+========================= */
+
+.linha {
+    width: 80px;
+    height: 1px;
+
+    margin: 25px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffe4a0,
+            transparent
+        );
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+    max-width: 580px;
+
+    margin: auto;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, 0.92);
+}
+
+
+.mensagem strong {
+    color: #ffe3a0;
+
+    text-shadow:
+        0 0 8px rgba(255, 220, 130, 0.35);
+}
+
+
+/* =========================
+   DECORAÇÃO
+========================= */
+
+.decoracao {
+    margin-top: 25px;
+
+    color: #ffe2a0;
+
+    letter-spacing: 8px;
+
+    opacity: 0.85;
+}
+
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+@keyframes carregar {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 53.33%;
+    }
+}
+
+
+@keyframes brilho {
+
+    from {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+    .card {
+        width: 92%;
+        padding: 35px 25px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .porcentagem {
+        font-size: 52px;
+    }
+
+    .mensagem {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+}
