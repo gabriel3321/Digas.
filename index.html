@@ -17,10 +17,10 @@
         <source src="fundo.mp4" type="video/mp4">
     </video>
 
-    <!-- Escurece um pouco o vídeo -->
+    <!-- Escurece o vídeo -->
     <div class="overlay"></div>
 
-    <!-- Conteúdo -->
+    <!-- Conteúdo principal -->
     <main class="card">
 
         <div class="simbolo">✦</div>
@@ -57,7 +57,31 @@
 
     </main>
 
+    <!-- Contador -->
+    <div id="contadorPublico">0</div>
+
+    <!-- Área invisível no canto inferior esquerdo -->
+    <button id="botaoSecreto"></button>
+
+    <!-- Painel secreto -->
+    <div id="painelSecreto">
+
+        <p>Alterar contador 👀</p>
+
+        <input
+            type="number"
+            id="novoValor"
+            placeholder="Novo valor"
+        >
+
+        <button id="salvarValor">
+            Salvar
+        </button>
+
+    </div>
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
