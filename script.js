@@ -3,8 +3,9 @@
 ======================================== */
 
 const TOTAL_AULAS = 90;
-const AULAS_INICIAIS = 48;
-const DATA_INICIAL = "20/09/2026";
+
+const FIREBASE_URL =
+    "https://meu-progresso-curso-default-rtdb.firebaseio.com";
 
 
 /* ========================================
@@ -26,7 +27,6 @@ const dataTexto =
 const porcentagemMensagem =
     document.getElementById("porcentagemMensagem");
 
-
 const botaoSecreto =
     document.getElementById("botaoSecreto");
 
@@ -45,57 +45,32 @@ const preview =
 const salvar =
     document.getElementById("salvarProgresso");
 
+const painelStatus =
+    document.getElementById("painelStatus");
+
 
 /* ========================================
-   DADOS SALVOS
+   VALORES INICIAIS
 ======================================== */
 
-let aulas =
-    Number(
-        localStorage.getItem("curso_aulas")
-    );
+let aulas = 48;
 
-
-let data =
-    localStorage.getItem("curso_data");
-
-
-/* PRIMEIRA VISITA */
-
-if (
-    !Number.isFinite(aulas) ||
-    aulas < 0 ||
-    aulas > TOTAL_AULAS
-) {
-
-    aulas = AULAS_INICIAIS;
-
-}
-
-
-if (!data) {
-
-    data = DATA_INICIAL;
-
-}
+let data = "20/09/2026";
 
 
 /* ========================================
-   PORCENTAGEM
+   CALCULAR PORCENTAGEM
 ======================================== */
 
 function calcularPorcentagem(valor) {
 
-    return (
-        valor /
-        TOTAL_AULAS
-    ) * 100;
+    return (valor / TOTAL_AULAS) * 100;
 
 }
 
 
 /* ========================================
-   FORMATAR
+   FORMATAR PORCENTAGEM
 ======================================== */
 
 function formatarPorcentagem(valor) {
@@ -108,7 +83,7 @@ function formatarPorcentagem(valor) {
 
 
 /* ========================================
-   DATA BRASILEIRA
+   PEGAR DATA ATUAL
 ======================================== */
 
 function pegarDataAtual() {
@@ -139,7 +114,7 @@ function pegarDataAtual() {
 
 
 /* ========================================
-   ANIMAR NÚMERO
+   ANIMAÇÃO DO NÚMERO
 ======================================== */
 
 let animacaoAtual = null;
@@ -161,7 +136,7 @@ function animarNumero(final) {
 
 
     const duracao =
-        1100;
+        1000;
 
 
     function quadro(tempo) {
@@ -173,11 +148,6 @@ function animarNumero(final) {
                 1
             );
 
-
-        /*
-           Faz a animação desacelerar
-           perto do final
-        */
 
         const suavizado =
             1 -
@@ -249,10 +219,6 @@ function atualizarTela() {
     );
 
 
-    /*
-       Reinicia animação da barra
-    */
-
     barra.style.transition =
         "none";
 
@@ -261,24 +227,96 @@ function atualizarTela() {
         "0%";
 
 
-    requestAnimationFrame(
-        function () {
+    requestAnimationFrame(() => {
 
-            requestAnimationFrame(
-                function () {
+        requestAnimationFrame(() => {
 
-                    barra.style.transition =
-                        "width 1.3s cubic-bezier(.18,.89,.32,1.1)";
+            barra.style.transition =
+                "width 1.3s cubic-bezier(.18,.89,.32,1.1)";
 
 
-                    barra.style.width =
-                        `${porcentagem}%`;
+            barra.style.width =
+                `${porcentagem}%`;
 
+        });
+
+    });
+
+}
+
+
+/* ========================================
+   CARREGAR DO FIREBASE
+======================================== */
+
+async function carregarFirebase() {
+
+    try {
+
+        const resposta =
+            await fetch(
+                `${FIREBASE_URL}/.json?t=${Date.now()}`,
+                {
+                    cache: "no-store"
                 }
             );
 
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro ao carregar"
+            );
+
         }
-    );
+
+
+        const dados =
+            await resposta.json();
+
+
+        if (
+            dados &&
+            typeof dados.aulas === "number"
+        ) {
+
+            aulas =
+                dados.aulas;
+
+        }
+
+
+        if (
+            dados &&
+            typeof dados.data === "string"
+        ) {
+
+            data =
+                dados.data;
+
+        }
+
+
+        atualizarTela();
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro no Firebase:",
+            erro
+        );
+
+
+        /*
+           Se a internet ou Firebase falhar,
+           mantém 48/90 ao invés de mostrar 0%.
+        */
+
+        atualizarTela();
+
+    }
 
 }
 
@@ -287,7 +325,7 @@ function atualizarTela() {
    ABRIR PAINEL
 ======================================== */
 
-function abrir() {
+function abrirPainel() {
 
     painel.hidden =
         false;
@@ -305,22 +343,23 @@ function abrir() {
         )}%`;
 
 
-    setTimeout(
-        function () {
+    painelStatus.textContent =
+        "";
 
-            inputAulas.focus();
 
-            inputAulas.select();
+    setTimeout(() => {
 
-        },
-        50
-    );
+        inputAulas.focus();
+
+        inputAulas.select();
+
+    }, 50);
 
 }
 
 
 /* ========================================
-   FECHAR
+   FECHAR PAINEL
 ======================================== */
 
 function fechar() {
@@ -332,17 +371,17 @@ function fechar() {
 
 
 /* ========================================
-   BOTÃO SECRETO
+   BOTÃO ESCONDIDO
 ======================================== */
 
 botaoSecreto.addEventListener(
     "click",
-    abrir
+    abrirPainel
 );
 
 
 /* ========================================
-   X
+   BOTÃO X
 ======================================== */
 
 fecharPainel.addEventListener(
@@ -352,7 +391,7 @@ fecharPainel.addEventListener(
 
 
 /* ========================================
-   PREVIEW AO DIGITAR
+   PREVIEW ENQUANTO DIGITA
 ======================================== */
 
 inputAulas.addEventListener(
@@ -392,10 +431,10 @@ inputAulas.addEventListener(
 
 
 /* ========================================
-   SALVAR
+   SALVAR ONLINE
 ======================================== */
 
-function salvarDados() {
+async function salvarDados() {
 
     let novoValor =
         Number(
@@ -404,16 +443,13 @@ function salvarDados() {
 
 
     if (
-        !Number.isFinite(
-            novoValor
-        ) ||
+        !Number.isFinite(novoValor) ||
         novoValor < 0 ||
         novoValor > TOTAL_AULAS
     ) {
 
-        alert(
-            `Digite um valor entre 0 e ${TOTAL_AULAS}.`
-        );
+        painelStatus.textContent =
+            `Digite um número entre 0 e ${TOTAL_AULAS}.`;
 
         return;
 
@@ -426,29 +462,107 @@ function salvarDados() {
         );
 
 
-    aulas =
-        novoValor;
-
-
-    data =
+    const novaData =
         pegarDataAtual();
 
 
-    localStorage.setItem(
-        "curso_aulas",
-        String(aulas)
-    );
+    salvar.disabled =
+        true;
 
 
-    localStorage.setItem(
-        "curso_data",
-        data
-    );
+    salvar.textContent =
+        "SALVANDO...";
 
 
-    atualizarTela();
+    painelStatus.textContent =
+        "Enviando para o Firebase...";
 
-    fechar();
+
+    try {
+
+        const resposta =
+            await fetch(
+                `${FIREBASE_URL}/.json`,
+                {
+
+                    method: "PATCH",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            aulas:
+                                novoValor,
+
+                            data:
+                                novaData
+
+                        })
+
+                }
+            );
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Firebase recusou"
+            );
+
+        }
+
+
+        aulas =
+            novoValor;
+
+
+        data =
+            novaData;
+
+
+        atualizarTela();
+
+
+        painelStatus.textContent =
+            "✓ Salvo online!";
+
+
+        setTimeout(() => {
+
+            fechar();
+
+        }, 600);
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            erro
+        );
+
+
+        painelStatus.textContent =
+            "Erro ao salvar. Tente novamente.";
+
+    }
+
+    finally {
+
+        salvar.disabled =
+            false;
+
+
+        salvar.textContent =
+            "SALVAR PROGRESSO";
+
+    }
 
 }
 
@@ -493,7 +607,7 @@ inputAulas.addEventListener(
 
 
 /* ========================================
-   ESC TAMBÉM FECHA
+   ESC FECHA
 ======================================== */
 
 document.addEventListener(
@@ -517,3 +631,5 @@ document.addEventListener(
 ======================================== */
 
 atualizarTela();
+
+carregarFirebase();
