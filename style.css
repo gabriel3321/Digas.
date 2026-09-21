@@ -1,8 +1,13 @@
+/* ================================
+   CONFIGURAÇÃO GERAL
+================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 html,
 body {
@@ -10,8 +15,10 @@ body {
     height: 100%;
 }
 
+
 body {
     display: flex;
+
     justify-content: center;
     align-items: center;
 
@@ -20,13 +27,14 @@ body {
     font-family: Georgia, "Times New Roman", serif;
 
     color: white;
+
     background: #050914;
 }
 
 
-/* =========================
+/* ================================
    VÍDEO DE FUNDO
-========================= */
+================================ */
 
 .video-background {
     position: fixed;
@@ -45,9 +53,9 @@ body {
 }
 
 
-/* =========================
+/* ================================
    SOMBRA SOBRE O VÍDEO
-========================= */
+================================ */
 
 .overlay {
     position: fixed;
@@ -57,35 +65,36 @@ body {
     background:
         radial-gradient(
             circle at center,
-            rgba(20, 35, 70, 0.15),
-            rgba(3, 7, 20, 0.72)
+            rgba(20, 35, 70, 0.10),
+            rgba(3, 7, 20, 0.75)
         );
 
     z-index: -2;
 }
 
 
-/* =========================
+/* ================================
    CARD PRINCIPAL
-========================= */
+================================ */
 
 .card {
     position: relative;
 
     width: min(720px, 90%);
 
-    padding: 45px 55px;
+    padding: 42px 55px;
 
     text-align: center;
 
     background:
         linear-gradient(
             135deg,
-            rgba(13, 24, 48, 0.83),
-            rgba(24, 35, 66, 0.70)
+            rgba(13, 24, 48, 0.82),
+            rgba(24, 35, 66, 0.68)
         );
 
-    border: 1px solid rgba(255, 226, 153, 0.65);
+    border:
+        1px solid rgba(255, 226, 153, 0.70);
 
     border-radius: 22px;
 
@@ -96,9 +105,12 @@ body {
         0 0 35px rgba(110, 180, 255, 0.18),
         inset 0 0 30px rgba(255, 255, 255, 0.03);
 
-    animation: aparecer 1.2s ease;
+    animation:
+        aparecer 1.2s ease;
 }
 
+
+/* BORDA INTERNA */
 
 .card::before {
     content: "";
@@ -107,7 +119,8 @@ body {
 
     inset: 7px;
 
-    border: 1px solid rgba(255, 223, 145, 0.18);
+    border:
+        1px solid rgba(255, 223, 145, 0.18);
 
     border-radius: 16px;
 
@@ -115,9 +128,9 @@ body {
 }
 
 
-/* =========================
+/* ================================
    SÍMBOLO
-========================= */
+================================ */
 
 .simbolo {
     font-size: 35px;
@@ -126,15 +139,16 @@ body {
 
     text-shadow:
         0 0 10px #ffd978,
-        0 0 25px rgba(255, 214, 110, 0.7);
+        0 0 25px rgba(255, 214, 110, 0.70);
 
-    animation: brilho 2.5s infinite alternate;
+    animation:
+        brilho 2.5s infinite alternate;
 }
 
 
-/* =========================
-   TEXTOS
-========================= */
+/* ================================
+   TÍTULO
+================================ */
 
 .subtitulo {
     margin-top: 10px;
@@ -158,13 +172,14 @@ h1 {
 
     letter-spacing: 1px;
 
-    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+    text-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.50);
 }
 
 
-/* =========================
+/* ================================
    PORCENTAGEM
-========================= */
+================================ */
 
 .porcentagem {
     margin-top: 15px;
@@ -182,9 +197,9 @@ h1 {
 }
 
 
-/* =========================
-   BARRA
-========================= */
+/* ================================
+   BARRA DE PROGRESSO
+================================ */
 
 .barra {
     width: 100%;
@@ -194,16 +209,18 @@ h1 {
 
     overflow: hidden;
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border:
+        1px solid rgba(255, 255, 255, 0.25);
 
     border-radius: 100px;
 
-    background: rgba(0, 0, 0, 0.35);
+    background:
+        rgba(0, 0, 0, 0.35);
 }
 
 
 .progresso {
-    width: 0;
+    width: 0%;
     height: 100%;
 
     border-radius: 100px;
@@ -217,34 +234,60 @@ h1 {
         );
 
     box-shadow:
-        0 0 15px rgba(130, 205, 255, 0.8);
+        0 0 15px rgba(130, 205, 255, 0.80);
 
-    animation: carregar 2.3s ease forwards;
+    transition:
+        width 1.8s cubic-bezier(.22,.61,.36,1);
 }
 
 
-.progresso-texto {
-    margin-top: 9px;
+/* ================================
+   AULAS
+================================ */
+
+.aulas-texto {
+    margin-top: 12px;
 
     font-family: Arial, sans-serif;
 
-    font-size: 10px;
+    font-size: 11px;
+
+    font-weight: bold;
 
     letter-spacing: 3px;
 
-    color: rgba(255, 255, 255, 0.6);
+    color:
+        rgba(255, 255, 255, 0.75);
 }
 
 
-/* =========================
-   SEPARADOR
-========================= */
+/* ================================
+   DATA
+================================ */
+
+.data-atualizacao {
+    margin-top: 7px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(185, 217, 255, 0.70);
+}
+
+
+/* ================================
+   LINHA
+================================ */
 
 .linha {
     width: 80px;
     height: 1px;
 
-    margin: 25px auto;
+    margin: 22px auto;
 
     background:
         linear-gradient(
@@ -256,9 +299,9 @@ h1 {
 }
 
 
-/* =========================
+/* ================================
    MENSAGEM
-========================= */
+================================ */
 
 .mensagem {
     max-width: 580px;
@@ -271,7 +314,8 @@ h1 {
 
     line-height: 1.8;
 
-    color: rgba(255, 255, 255, 0.92);
+    color:
+        rgba(255, 255, 255, 0.92);
 }
 
 
@@ -282,6 +326,10 @@ h1 {
         0 0 8px rgba(255, 220, 130, 0.35);
 }
 
+
+/* ================================
+   DECORAÇÃO
+================================ */
 
 .decoracao {
     margin-top: 25px;
@@ -294,31 +342,9 @@ h1 {
 }
 
 
-/* =========================
-   CONTADOR
-========================= */
-
-#contadorPublico {
-    position: fixed;
-
-    bottom: 20px;
-    left: 20px;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 22px;
-    font-weight: bold;
-
-    color: white;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,0.8);
-
-    z-index: 10;
-}
-
-
-/* BOTÃO INVISÍVEL */
+/* ================================
+   BOTÃO SECRETO
+================================ */
 
 #botaoSecreto {
     position: fixed;
@@ -326,95 +352,205 @@ h1 {
     bottom: 0;
     left: 0;
 
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
 
     opacity: 0;
 
+    border: none;
+
     cursor: default;
 
-    z-index: 100;
+    z-index: 1000;
 }
 
 
-/* PAINEL SECRETO */
+/* ================================
+   PAINEL SECRETO
+================================ */
 
 #painelSecreto {
     display: none;
 
     position: fixed;
 
-    bottom: 60px;
+    bottom: 70px;
     left: 20px;
 
-    padding: 18px;
+    width: 280px;
 
-    background: rgba(10, 18, 35, 0.96);
+    padding: 22px;
 
-    border: 1px solid #ffe4a0;
+    font-family:
+        Arial, sans-serif;
 
-    border-radius: 12px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(11, 20, 42, 0.97),
+            rgba(28, 40, 72, 0.97)
+        );
 
-    font-family: Arial, sans-serif;
+    border:
+        1px solid rgba(255, 226, 153, 0.75);
+
+    border-radius: 14px;
 
     box-shadow:
-        0 10px 40px rgba(0,0,0,0.5);
+        0 15px 50px rgba(0, 0, 0, 0.60),
+        0 0 20px rgba(100, 170, 255, 0.15);
 
-    z-index: 100;
+    backdrop-filter: blur(15px);
+
+    z-index: 999;
 }
 
 
-#painelSecreto input {
-    width: 130px;
+.painel-titulo {
+    font-family:
+        Georgia, "Times New Roman", serif;
 
-    padding: 9px;
+    font-size: 19px;
 
-    margin-top: 10px;
+    color: #ffe4a0;
+}
 
-    border: none;
-    border-radius: 6px;
+
+.painel-descricao {
+    margin-top: 12px;
+
+    font-size: 13px;
+
+    color:
+        rgba(255, 255, 255, 0.80);
+}
+
+
+.campo-aulas {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+.campo-aulas input {
+    width: 100px;
+
+    padding: 11px;
+
+    font-size: 18px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.20);
+
+    border-radius: 8px;
 
     outline: none;
 }
 
 
-#painelSecreto button {
-    padding: 9px 13px;
+.campo-aulas input:focus {
+    border-color: #ffe4a0;
 
-    border: none;
-    border-radius: 6px;
-
-    cursor: pointer;
+    box-shadow:
+        0 0 10px rgba(255, 228, 160, 0.20);
 }
 
 
-/* =========================
+.campo-aulas span {
+    font-size: 17px;
+
+    color: #ffe4a0;
+}
+
+
+#salvarProgresso {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    color: #16203b;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b9dcff,
+            #ffe4a0
+        );
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#salvarProgresso:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 18px rgba(255, 225, 150, 0.20);
+}
+
+
+.painel-dica {
+    margin-top: 12px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color:
+        rgba(255, 255, 255, 0.45);
+}
+
+
+/* ================================
    ANIMAÇÕES
-========================= */
+================================ */
 
 @keyframes aparecer {
 
     from {
         opacity: 0;
-        transform: translateY(25px) scale(0.97);
+
+        transform:
+            translateY(25px)
+            scale(0.97);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
 
-
-@keyframes carregar {
-
-    from {
-        width: 0;
+        transform:
+            translateY(0)
+            scale(1);
     }
 
-    to {
-        width: 53.33%;
-    }
 }
 
 
@@ -422,38 +558,58 @@ h1 {
 
     from {
         opacity: 0.6;
-        transform: scale(0.9);
+
+        transform:
+            scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: scale(1.1);
+
+        transform:
+            scale(1.1);
     }
+
 }
 
 
-/* =========================
+/* ================================
    CELULAR
-========================= */
+================================ */
 
 @media (max-width: 600px) {
 
     .card {
         width: 92%;
-        padding: 35px 25px;
+
+        padding:
+            32px 24px;
     }
+
 
     h1 {
         font-size: 32px;
     }
 
+
     .porcentagem {
-        font-size: 52px;
+        font-size: 50px;
     }
+
 
     .mensagem {
         font-size: 15px;
+
         line-height: 1.65;
+    }
+
+
+    #painelSecreto {
+        left: 10px;
+
+        bottom: 65px;
+
+        width: 260px;
     }
 
 }
