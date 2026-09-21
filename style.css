@@ -1,7 +1,3 @@
-/* =========================================
-   RESET
-========================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -20,35 +16,27 @@ body {
     min-height: 100vh;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     overflow: hidden;
 
-    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    color: white;
 
     background: #050914;
 }
 
 
-/* =========================================
-   GARANTIA EXTRA
-   QUALQUER COISA COM hidden SOME
-========================================= */
+/* GARANTE QUE O PAINEL FIQUE ESCONDIDO */
 
 [hidden] {
     display: none !important;
 }
 
 
-/* =========================================
-   FUNDO
-========================================= */
+/* FUNDO */
 
 .video-background {
     position: fixed;
@@ -64,10 +52,6 @@ body {
 }
 
 
-/* =========================================
-   ESCURECIMENTO
-========================================= */
-
 .overlay {
     position: fixed;
 
@@ -76,34 +60,22 @@ body {
     z-index: -4;
 
     background:
-
         radial-gradient(
             circle at center,
-            rgba(35, 65, 110, 0.05) 0%,
-            rgba(5, 10, 25, 0.28) 55%,
-            rgba(2, 6, 16, 0.70) 100%
-        ),
-
-        linear-gradient(
-            rgba(5, 12, 28, 0.18),
-            rgba(5, 12, 28, 0.38)
+            rgba(30, 60, 110, 0.08),
+            rgba(4, 9, 23, 0.65)
         );
 }
 
 
-/* =========================================
-   CARD PRINCIPAL
-========================================= */
+/* CARD */
 
 .card {
     position: relative;
 
     width: min(660px, 88vw);
 
-    padding:
-        48px
-        50px
-        42px;
+    padding: 48px 50px 42px;
 
     text-align: center;
 
@@ -123,24 +95,14 @@ body {
     backdrop-filter: blur(16px);
 
     box-shadow:
-
-        0 30px 100px
-        rgba(0, 0, 0, 0.60),
-
-        0 0 45px
-        rgba(77, 153, 255, 0.10),
-
-        inset 0 0 50px
-        rgba(255, 255, 255, 0.025);
+        0 30px 100px rgba(0, 0, 0, 0.60),
+        0 0 45px rgba(77, 153, 255, 0.10),
+        inset 0 0 50px rgba(255, 255, 255, 0.025);
 
     animation:
-        entradaCard
-        900ms
-        cubic-bezier(.2,.8,.2,1);
+        entradaCard 0.9s ease;
 }
 
-
-/* BORDA INTERNA */
 
 .card::before {
     content: "";
@@ -159,9 +121,7 @@ body {
 }
 
 
-/* =========================================
-   ESTRELA
-========================================= */
+/* ESTRELA */
 
 .simbolo {
     font-size: 34px;
@@ -170,20 +130,14 @@ body {
 
     text-shadow:
         0 0 8px #ffd56f,
-        0 0 25px rgba(255, 213, 111, 0.80);
+        0 0 25px rgba(255, 213, 111, 0.8);
 
     animation:
-        estrela
-        2s
-        ease-in-out
-        infinite
-        alternate;
+        estrela 2s ease-in-out infinite alternate;
 }
 
 
-/* =========================================
-   SUBTÍTULO
-========================================= */
+/* SUBTÍTULO */
 
 .subtitulo {
     margin-top: 11px;
@@ -198,9 +152,7 @@ body {
 }
 
 
-/* =========================================
-   TÍTULO
-========================================= */
+/* TÍTULO */
 
 h1 {
     margin-top: 12px;
@@ -210,32 +162,21 @@ h1 {
         "Times New Roman",
         serif;
 
-    font-size: clamp(
-        34px,
-        4vw,
-        44px
-    );
+    font-size: 44px;
 
     font-weight: 500;
 
     text-shadow:
-        0 4px 15px
-        rgba(0, 0, 0, 0.45);
+        0 4px 15px rgba(0, 0, 0, 0.45);
 }
 
 
-/* =========================================
-   PORCENTAGEM
-========================================= */
+/* PORCENTAGEM */
 
 .porcentagem {
     margin-top: 18px;
 
-    font-size: clamp(
-        52px,
-        6vw,
-        70px
-    );
+    font-size: 70px;
 
     font-weight: 800;
 
@@ -244,18 +185,12 @@ h1 {
     color: #ffe39c;
 
     text-shadow:
-
-        0 0 10px
-        rgba(255, 220, 130, 0.75),
-
-        0 0 30px
-        rgba(255, 201, 77, 0.25);
+        0 0 10px rgba(255, 220, 130, 0.75),
+        0 0 30px rgba(255, 201, 77, 0.25);
 }
 
 
-/* =========================================
-   BARRA
-========================================= */
+/* BARRA */
 
 .barra {
     width: 100%;
@@ -273,10 +208,6 @@ h1 {
 
     background:
         rgba(3, 8, 20, 0.65);
-
-    box-shadow:
-        inset 0 2px 5px
-        rgba(0, 0, 0, 0.40);
 }
 
 
@@ -289,25 +220,20 @@ h1 {
     background:
         linear-gradient(
             90deg,
-            #6fbfff 0%,
-            #b9e2ff 45%,
-            #ffe193 100%
+            #6fbfff,
+            #b9e2ff,
+            #ffe193
         );
 
     box-shadow:
-        0 0 16px
-        rgba(111, 191, 255, 0.80);
+        0 0 16px rgba(111, 191, 255, 0.8);
 
     transition:
-        width
-        1.3s
-        cubic-bezier(.18,.89,.32,1.1);
+        width 1.3s cubic-bezier(.18,.89,.32,1.1);
 }
 
 
-/* =========================================
-   AULAS
-========================================= */
+/* AULAS */
 
 .aulas-texto {
     margin-top: 10px;
@@ -323,9 +249,7 @@ h1 {
 }
 
 
-/* =========================================
-   DATA
-========================================= */
+/* DATA */
 
 .data-atualizacao {
     margin-top: 5px;
@@ -337,9 +261,7 @@ h1 {
 }
 
 
-/* =========================================
-   LINHA
-========================================= */
+/* LINHA */
 
 .linha {
     width: 70px;
@@ -357,9 +279,7 @@ h1 {
 }
 
 
-/* =========================================
-   TEXTO
-========================================= */
+/* MENSAGEM */
 
 .mensagem {
     max-width: 560px;
@@ -379,14 +299,11 @@ h1 {
     color: #ffe096;
 
     text-shadow:
-        0 0 8px
-        rgba(255, 214, 110, 0.30);
+        0 0 8px rgba(255, 214, 110, 0.3);
 }
 
 
-/* =========================================
-   DECORAÇÃO
-========================================= */
+/* DECORAÇÃO */
 
 .decoracao {
     margin-top: 28px;
@@ -400,17 +317,10 @@ h1 {
     letter-spacing: 9px;
 
     color: #ffdd91;
-
-    opacity: 0.90;
 }
 
 
-/* =========================================
-   BOTÃO SECRETO
-
-   ÁREA DE 55x55 NO CANTO
-   INFERIOR ESQUERDO
-========================================= */
+/* BOTÃO INVISÍVEL */
 
 #botaoSecreto {
     position: fixed;
@@ -418,16 +328,12 @@ h1 {
     left: 0;
     bottom: 0;
 
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
 
     z-index: 9999;
 
-    padding: 0;
-
-    border: 0;
-
-    outline: 0;
+    border: none;
 
     opacity: 0;
 
@@ -437,27 +343,25 @@ h1 {
 }
 
 
-/* =========================================
-   PAINEL SECRETO
-========================================= */
+/* PAINEL */
 
 #painelSecreto {
     position: fixed;
 
     left: 22px;
-    bottom: 72px;
+    bottom: 75px;
+
+    width: 320px;
+
+    padding: 22px;
 
     z-index: 10000;
-
-    width: 310px;
-
-    padding: 21px;
 
     border-radius: 18px;
 
     border:
         1px solid
-        rgba(255, 224, 145, 0.65);
+        rgba(255, 224, 145, 0.7);
 
     background:
         linear-gradient(
@@ -469,23 +373,15 @@ h1 {
     backdrop-filter: blur(20px);
 
     box-shadow:
-
-        0 20px 60px
-        rgba(0,0,0,0.60),
-
-        0 0 25px
-        rgba(87, 159, 255, 0.15);
+        0 20px 60px rgba(0,0,0,0.6),
+        0 0 25px rgba(87,159,255,0.15);
 
     animation:
-        abrirPainel
-        250ms
-        ease-out;
+        abrirPainel 0.25s ease;
 }
 
 
-/* =========================================
-   TOPO DO PAINEL
-========================================= */
+/* TOPO */
 
 .painel-topo {
     display: flex;
@@ -503,55 +399,25 @@ h1 {
 }
 
 
-.mini-estrela {
-    margin-right: 4px;
-
-    text-shadow:
-        0 0 10px
-        rgba(255, 214, 110, 0.8);
-}
-
-
-/* X */
-
 #fecharPainel {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
 
-    display: grid;
-    place-items: center;
-
-    border: 0;
-
+    border: none;
     border-radius: 50%;
 
     font-size: 20px;
-    line-height: 1;
 
-    color:
-        rgba(255,255,255,0.75);
-
-    background:
-        rgba(255,255,255,0.07);
-
-    cursor: pointer;
-
-    transition:
-        0.2s ease;
-}
-
-
-#fecharPainel:hover {
     color: white;
 
     background:
-        rgba(255,255,255,0.15);
+        rgba(255,255,255,0.08);
+
+    cursor: pointer;
 }
 
 
-/* =========================================
-   TEXTO PAINEL
-========================================= */
+/* DESCRIÇÃO */
 
 .painel-descricao {
     margin-top: 18px;
@@ -559,13 +425,11 @@ h1 {
     font-size: 13px;
 
     color:
-        rgba(255,255,255,0.72);
+        rgba(255,255,255,0.75);
 }
 
 
-/* =========================================
-   INPUT
-========================================= */
+/* CAMPO */
 
 .campo-aulas {
     display: flex;
@@ -575,46 +439,41 @@ h1 {
 
     gap: 12px;
 
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 
 .campo-aulas input {
     width: 110px;
 
-    padding: 11px 12px;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.18);
-
-    border-radius: 10px;
-
-    outline: none;
+    padding: 11px;
 
     text-align: center;
 
     font-size: 22px;
-
     font-weight: 700;
 
     color: white;
 
+    outline: none;
+
+    border-radius: 10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.20);
+
     background:
         rgba(255,255,255,0.07);
-
-    transition:
-        0.2s ease;
 }
 
 
 .campo-aulas input:focus {
     border-color:
-        rgba(255, 223, 145, 0.8);
+        #ffe09a;
 
     box-shadow:
-        0 0 15px
-        rgba(255, 218, 125, 0.14);
+        0 0 15px rgba(255,218,125,0.15);
 }
 
 
@@ -627,16 +486,14 @@ h1 {
 }
 
 
-/* =========================================
-   PREVIEW
-========================================= */
+/* PREVIEW */
 
 #previewPorcentagem {
     margin-top: 14px;
 
     text-align: center;
 
-    font-size: 25px;
+    font-size: 26px;
 
     font-weight: 800;
 
@@ -644,9 +501,7 @@ h1 {
 }
 
 
-/* =========================================
-   SALVAR
-========================================= */
+/* SALVAR */
 
 #salvarProgresso {
     width: 100%;
@@ -674,52 +529,52 @@ h1 {
 
     cursor: pointer;
 
-    box-shadow:
-        0 6px 20px
-        rgba(0,0,0,0.25);
-
     transition:
-        transform .15s ease,
-        filter .15s ease;
+        transform 0.15s ease;
 }
 
 
 #salvarProgresso:hover {
     transform:
         translateY(-2px);
-
-    filter:
-        brightness(1.08);
 }
 
 
-#salvarProgresso:active {
-    transform:
-        translateY(0);
+#salvarProgresso:disabled {
+    opacity: 0.6;
+
+    cursor: wait;
 }
 
 
-/* =========================================
-   DICA
-========================================= */
+/* STATUS */
+
+.painel-status {
+    min-height: 16px;
+
+    margin-top: 10px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: #a9e8b5;
+}
+
 
 .painel-dica {
-    margin-top: 13px;
+    margin-top: 6px;
 
     text-align: center;
 
     font-size: 10px;
-
-    line-height: 1.5;
 
     color:
         rgba(255,255,255,0.40);
 }
 
 
-/* =========================================
-   ANIMAÇÕES
-========================================= */
+/* ANIMAÇÕES */
 
 @keyframes entradaCard {
 
@@ -728,7 +583,7 @@ h1 {
 
         transform:
             translateY(20px)
-            scale(.97);
+            scale(0.97);
     }
 
     to {
@@ -738,28 +593,20 @@ h1 {
             translateY(0)
             scale(1);
     }
-
 }
 
 
 @keyframes estrela {
 
     from {
-        transform:
-            scale(.90);
-
-        opacity:
-            .70;
+        transform: scale(0.9);
+        opacity: 0.7;
     }
 
     to {
-        transform:
-            scale(1.10);
-
-        opacity:
-            1;
+        transform: scale(1.1);
+        opacity: 1;
     }
-
 }
 
 
@@ -770,7 +617,7 @@ h1 {
 
         transform:
             translateY(10px)
-            scale(.96);
+            scale(0.96);
     }
 
     to {
@@ -780,13 +627,10 @@ h1 {
             translateY(0)
             scale(1);
     }
-
 }
 
 
-/* =========================================
-   CELULAR
-========================================= */
+/* CELULAR */
 
 @media (max-width: 600px) {
 
@@ -800,15 +644,13 @@ h1 {
     }
 
 
-    .subtitulo {
-        font-size: 8px;
-
-        letter-spacing: 4px;
+    h1 {
+        font-size: 34px;
     }
 
 
     .porcentagem {
-        font-size: 51px;
+        font-size: 52px;
     }
 
 
@@ -822,13 +664,12 @@ h1 {
     #painelSecreto {
         left: 12px;
 
-        bottom: 65px;
+        bottom: 70px;
 
         width:
             calc(100vw - 24px);
 
-        max-width:
-            310px;
+        max-width: 320px;
     }
 
 }
