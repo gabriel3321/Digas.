@@ -1,89 +1,102 @@
-// ======================================
-// CONFIGURAÇÃO DO CURSO
-// ======================================
+/* ========================================
+   CONFIGURAÇÃO
+======================================== */
 
 const TOTAL_AULAS = 90;
-
 const AULAS_INICIAIS = 48;
-
 const DATA_INICIAL = "20/09/2026";
 
 
-// ======================================
-// ELEMENTOS DA PÁGINA
-// ======================================
+/* ========================================
+   ELEMENTOS
+======================================== */
 
 const numero =
     document.getElementById("numero");
 
-const barraProgresso =
+const barra =
     document.getElementById("barraProgresso");
 
 const aulasTexto =
     document.getElementById("aulasTexto");
 
-const dataAtualizacao =
+const dataTexto =
     document.getElementById("dataAtualizacao");
 
 const porcentagemMensagem =
     document.getElementById("porcentagemMensagem");
 
+
 const botaoSecreto =
     document.getElementById("botaoSecreto");
 
-const painelSecreto =
+const painel =
     document.getElementById("painelSecreto");
 
-const aulasConcluidas =
+const fecharPainel =
+    document.getElementById("fecharPainel");
+
+const inputAulas =
     document.getElementById("aulasConcluidas");
 
-const salvarProgresso =
+const preview =
+    document.getElementById("previewPorcentagem");
+
+const salvar =
     document.getElementById("salvarProgresso");
 
 
-// ======================================
-// CARREGAR DADOS SALVOS
-// ======================================
+/* ========================================
+   DADOS SALVOS
+======================================== */
 
-let aulasSalvas =
-    localStorage.getItem("aulasConcluidas");
-
-let dataSalva =
-    localStorage.getItem("dataAtualizacao");
-
-
-if (aulasSalvas === null) {
-
-    aulasSalvas = AULAS_INICIAIS;
-
-}
+let aulas =
+    Number(
+        localStorage.getItem("curso_aulas")
+    );
 
 
-if (dataSalva === null) {
-
-    dataSalva = DATA_INICIAL;
-
-}
+let data =
+    localStorage.getItem("curso_data");
 
 
-aulasSalvas =
-    Number(aulasSalvas);
+/* PRIMEIRA VISITA */
 
+if (
+    !Number.isFinite(aulas) ||
+    aulas < 0 ||
+    aulas > TOTAL_AULAS
+) {
 
-// ======================================
-// CALCULAR PORCENTAGEM
-// ======================================
-
-function calcularPorcentagem(aulas) {
-
-    return (aulas / TOTAL_AULAS) * 100;
+    aulas = AULAS_INICIAIS;
 
 }
 
 
-// ======================================
-// FORMATAR PORCENTAGEM
-// ======================================
+if (!data) {
+
+    data = DATA_INICIAL;
+
+}
+
+
+/* ========================================
+   PORCENTAGEM
+======================================== */
+
+function calcularPorcentagem(valor) {
+
+    return (
+        valor /
+        TOTAL_AULAS
+    ) * 100;
+
+}
+
+
+/* ========================================
+   FORMATAR
+======================================== */
 
 function formatarPorcentagem(valor) {
 
@@ -94,130 +107,283 @@ function formatarPorcentagem(valor) {
 }
 
 
-// ======================================
-// ATUALIZAR O SITE
-// ======================================
+/* ========================================
+   DATA BRASILEIRA
+======================================== */
 
-function atualizarSite(aulas, data) {
+function pegarDataAtual() {
+
+    const hoje =
+        new Date();
+
+
+    const dia =
+        String(
+            hoje.getDate()
+        ).padStart(2, "0");
+
+
+    const mes =
+        String(
+            hoje.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const ano =
+        hoje.getFullYear();
+
+
+    return `${dia}/${mes}/${ano}`;
+
+}
+
+
+/* ========================================
+   ANIMAR NÚMERO
+======================================== */
+
+let animacaoAtual = null;
+
+
+function animarNumero(final) {
+
+    if (animacaoAtual) {
+
+        cancelAnimationFrame(
+            animacaoAtual
+        );
+
+    }
+
+
+    const inicio =
+        performance.now();
+
+
+    const duracao =
+        1100;
+
+
+    function quadro(tempo) {
+
+        const progresso =
+            Math.min(
+                (tempo - inicio) /
+                duracao,
+                1
+            );
+
+
+        /*
+           Faz a animação desacelerar
+           perto do final
+        */
+
+        const suavizado =
+            1 -
+            Math.pow(
+                1 - progresso,
+                3
+            );
+
+
+        const atual =
+            final *
+            suavizado;
+
+
+        numero.textContent =
+            formatarPorcentagem(
+                atual
+            );
+
+
+        if (progresso < 1) {
+
+            animacaoAtual =
+                requestAnimationFrame(
+                    quadro
+                );
+
+        }
+
+    }
+
+
+    animacaoAtual =
+        requestAnimationFrame(
+            quadro
+        );
+
+}
+
+
+/* ========================================
+   ATUALIZAR TELA
+======================================== */
+
+function atualizarTela() {
 
     const porcentagem =
-        calcularPorcentagem(aulas);
+        calcularPorcentagem(
+            aulas
+        );
 
-
-    // Atualiza aulas
 
     aulasTexto.textContent =
-        aulas +
-        " / " +
-        TOTAL_AULAS +
-        " AULAS";
+        `${aulas} / ${TOTAL_AULAS} AULAS`;
 
 
-    // Atualiza data
+    dataTexto.textContent =
+        `Atualizado em ${data}`;
 
-    dataAtualizacao.textContent =
-        "Atualizado em " + data;
-
-
-    // Atualiza texto da mensagem
 
     porcentagemMensagem.textContent =
-        formatarPorcentagem(porcentagem) + "%";
+        `${formatarPorcentagem(
+            porcentagem
+        )}%`;
 
 
-    // Começa animação do número
+    animarNumero(
+        porcentagem
+    );
 
-    animarNumero(porcentagem);
+
+    /*
+       Reinicia animação da barra
+    */
+
+    barra.style.transition =
+        "none";
 
 
-    // Faz a barra começar vazia
-
-    barraProgresso.style.width =
+    barra.style.width =
         "0%";
 
 
-    // Pequeno atraso para mostrar animação
+    requestAnimationFrame(
+        function () {
 
-    setTimeout(function () {
+            requestAnimationFrame(
+                function () {
 
-        barraProgresso.style.width =
-            porcentagem + "%";
-
-    }, 150);
-
-}
+                    barra.style.transition =
+                        "width 1.3s cubic-bezier(.18,.89,.32,1.1)";
 
 
-// ======================================
-// ANIMAÇÃO DA PORCENTAGEM
-// ======================================
+                    barra.style.width =
+                        `${porcentagem}%`;
 
-function animarNumero(porcentagemFinal) {
+                }
+            );
 
-    let atual = 0;
-
-    const duracao = 1200;
-
-    const intervalo = 15;
-
-    const passos =
-        duracao / intervalo;
-
-    const incremento =
-        porcentagemFinal / passos;
-
-
-    const animacao =
-        setInterval(function () {
-
-            atual += incremento;
-
-
-            if (atual >= porcentagemFinal) {
-
-                atual =
-                    porcentagemFinal;
-
-                clearInterval(animacao);
-
-            }
-
-
-            numero.textContent =
-                formatarPorcentagem(atual);
-
-        }, intervalo);
+        }
+    );
 
 }
 
 
-// ======================================
-// ABRIR PAINEL SECRETO
-// ======================================
+/* ========================================
+   ABRIR PAINEL
+======================================== */
+
+function abrir() {
+
+    painel.hidden =
+        false;
+
+
+    inputAulas.value =
+        aulas;
+
+
+    preview.textContent =
+        `${formatarPorcentagem(
+            calcularPorcentagem(
+                aulas
+            )
+        )}%`;
+
+
+    setTimeout(
+        function () {
+
+            inputAulas.focus();
+
+            inputAulas.select();
+
+        },
+        50
+    );
+
+}
+
+
+/* ========================================
+   FECHAR
+======================================== */
+
+function fechar() {
+
+    painel.hidden =
+        true;
+
+}
+
+
+/* ========================================
+   BOTÃO SECRETO
+======================================== */
 
 botaoSecreto.addEventListener(
     "click",
+    abrir
+);
+
+
+/* ========================================
+   X
+======================================== */
+
+fecharPainel.addEventListener(
+    "click",
+    fechar
+);
+
+
+/* ========================================
+   PREVIEW AO DIGITAR
+======================================== */
+
+inputAulas.addEventListener(
+    "input",
     function () {
 
+        const valor =
+            Number(
+                inputAulas.value
+            );
+
+
         if (
-            painelSecreto.style.display
-            === "block"
+            Number.isFinite(valor) &&
+            valor >= 0 &&
+            valor <= TOTAL_AULAS
         ) {
 
-            painelSecreto.style.display =
-                "none";
+            preview.textContent =
+                `${formatarPorcentagem(
+                    calcularPorcentagem(
+                        valor
+                    )
+                )}%`;
 
         }
 
         else {
 
-            painelSecreto.style.display =
-                "block";
-
-            aulasConcluidas.value =
-                aulasSalvas;
-
-            aulasConcluidas.focus();
+            preview.textContent =
+                "--,--%";
 
         }
 
@@ -225,124 +391,100 @@ botaoSecreto.addEventListener(
 );
 
 
-// ======================================
-// SALVAR NOVO PROGRESSO
-// ======================================
+/* ========================================
+   SALVAR
+======================================== */
 
-salvarProgresso.addEventListener(
+function salvarDados() {
+
+    let novoValor =
+        Number(
+            inputAulas.value
+        );
+
+
+    if (
+        !Number.isFinite(
+            novoValor
+        ) ||
+        novoValor < 0 ||
+        novoValor > TOTAL_AULAS
+    ) {
+
+        alert(
+            `Digite um valor entre 0 e ${TOTAL_AULAS}.`
+        );
+
+        return;
+
+    }
+
+
+    novoValor =
+        Math.floor(
+            novoValor
+        );
+
+
+    aulas =
+        novoValor;
+
+
+    data =
+        pegarDataAtual();
+
+
+    localStorage.setItem(
+        "curso_aulas",
+        String(aulas)
+    );
+
+
+    localStorage.setItem(
+        "curso_data",
+        data
+    );
+
+
+    atualizarTela();
+
+    fechar();
+
+}
+
+
+/* ========================================
+   BOTÃO SALVAR
+======================================== */
+
+salvar.addEventListener(
     "click",
-    function () {
-
-        let novoNumero =
-            Number(aulasConcluidas.value);
-
-
-        // Impede valores inválidos
-
-        if (
-            novoNumero < 0 ||
-            novoNumero > TOTAL_AULAS ||
-            isNaN(novoNumero)
-        ) {
-
-            alert(
-                "Digite um número entre 0 e " +
-                TOTAL_AULAS +
-                "."
-            );
-
-            return;
-
-        }
-
-
-        // Não permite casas decimais
-
-        novoNumero =
-            Math.floor(novoNumero);
-
-
-        // Pega a data atual
-
-        const hoje =
-            new Date();
-
-
-        const dia =
-            String(
-                hoje.getDate()
-            ).padStart(2, "0");
-
-
-        const mes =
-            String(
-                hoje.getMonth() + 1
-            ).padStart(2, "0");
-
-
-        const ano =
-            hoje.getFullYear();
-
-
-        const novaData =
-            dia +
-            "/" +
-            mes +
-            "/" +
-            ano;
-
-
-        // Atualiza valores
-
-        aulasSalvas =
-            novoNumero;
-
-        dataSalva =
-            novaData;
-
-
-        // Salva no navegador
-
-        localStorage.setItem(
-            "aulasConcluidas",
-            aulasSalvas
-        );
-
-
-        localStorage.setItem(
-            "dataAtualizacao",
-            dataSalva
-        );
-
-
-        // Atualiza o site
-
-        atualizarSite(
-            aulasSalvas,
-            dataSalva
-        );
-
-
-        // Fecha painel
-
-        painelSecreto.style.display =
-            "none";
-
-    }
+    salvarDados
 );
 
 
-// ======================================
-// ENTER TAMBÉM SALVA
-// ======================================
+/* ========================================
+   ENTER SALVA
+======================================== */
 
-aulasConcluidas.addEventListener(
+inputAulas.addEventListener(
     "keydown",
     function (event) {
 
-        if (event.key === "Enter") {
+        if (
+            event.key === "Enter"
+        ) {
 
-            salvarProgresso.click();
+            salvarDados();
+
+        }
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            fechar();
 
         }
 
@@ -350,11 +492,28 @@ aulasConcluidas.addEventListener(
 );
 
 
-// ======================================
-// INICIAR SITE
-// ======================================
+/* ========================================
+   ESC TAMBÉM FECHA
+======================================== */
 
-atualizarSite(
-    aulasSalvas,
-    dataSalva
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            fechar();
+
+        }
+
+    }
 );
+
+
+/* ========================================
+   INICIAR
+======================================== */
+
+atualizarTela();
